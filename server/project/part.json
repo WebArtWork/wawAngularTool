@@ -1,0 +1,22 @@
+{
+	"name": "Project",
+	"router": [{
+		"name": "Basic",
+		"src": "router.js"
+	}],
+	"dependencies": {
+	},
+	"crud": {
+		"updatesAll": [{
+			"keys": ["name","description"],
+			"name": ""
+		},{
+			"keys": ["moderators"],
+			"name": "author"
+		}],
+		"unique_field": [{
+			"key": "url",
+			"name": ""
+		}],
+	}
+}

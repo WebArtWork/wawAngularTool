@@ -1,0 +1,20 @@
+{% extends 'public/index.html' %}
+{% block body %}
+<div>
+	<a ui-sref="NewProject">New Project</a>
+	<a ui-sref="MyProjects">My Projects</a>
+	<a ui-sref="NewItem">New Item</a>
+	<a ui-sref="MyItems">My Items</a>
+	<a target="_self" href="/Item/123">Item</a>
+	<a ui-sref="AllItems">All Items</a>
+	<a ui-sref="ProjectItems">Project Items</a>
+</div>
+<div>
+	<ui-view></ui-view>
+</div>
+{% endblock %}
+{% block script %}
+	<script src="/gen/user-min.js"></script>
+	<script src="/js/wcom/wcom.js"></script>
+	<script src="/js/crud.js"></script>
+{% endblock %}

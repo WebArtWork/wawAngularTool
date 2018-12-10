@@ -1,0 +1,41 @@
+{
+	"name": "User",
+	"router": [{
+		"name": "Basic",
+		"src": "router.js"
+	}, {
+		"name": "Auth",
+		"src": "auth.js"
+	}, {
+		"name": "database",
+		"src": "database/list.js"
+	}, {
+		"name": "waw_files",
+		"src": "waw_files/index.js"
+	}],
+	"crud": {
+		"updatesAll": [{
+			"keys": ["name","friends","data", "email"],
+			"name": ""
+		},{
+			"keys": ["name","friends","data","email","kind"],
+			"name": "admin"
+		},{
+			"keys": ["name","friends","data","email","is","kind","architect"],
+			"name": "super"
+		}],
+		"deletes": ["admin"],
+		"unique_field": [{
+			"key": "email",
+			"name": "email"
+		}]
+	},
+	"dependencies": {
+		"express-recaptcha": "*",
+		"passport-local": "*",
+		"bcrypt-nodejs": "*",
+		"mongoose": "*",
+		"wlogger": "*",
+		"xlsx": "*"
+	}
+}
