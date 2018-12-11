@@ -7,9 +7,10 @@ module.exports = function(app, sd) {
 	app.get('/Item/:id/ua', sd._set_ua, Item);
 	app.get('/Item/:id/ru', sd._set_ru, Item);
 
-	var User = function(req, res){
-		console.log('we are here');
+	app.get('*', function(req, res, next){
+		if(req.user) next();
+		else res.redirect('/Login');
+	}, function(req, res){
 		res.render('User', sd._ro(req, res, {}));
-	}
-	app.get('*', sd._ensure, User);
+	});
 };

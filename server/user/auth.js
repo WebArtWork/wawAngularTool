@@ -22,6 +22,33 @@ module.exports = function(sd) {
 				done(err, user);
 			});
 		});
+		router.get("/me", sd._ensure, function(req, res) {
+			var json = {};
+			if(req.user){
+				sd.User.schema.eachPath(function(path) {
+					path = path.split('.')[0];
+					if(path=='password'||path=='__v'||json[path]) return;
+					json[path] = req.user[path];
+				});
+			}
+			res.json(json);
+		});
+		router.post('/status', function(req, res) {
+            User.findOne({
+                $or: [{
+                    reg_email: req.body.email.toLowerCase()
+                },{
+                    email: req.body.email.toLowerCase()
+                }]
+            }, function(err, user) {
+                var json = {};
+                json.email = !!user;
+                if(user&&req.body.password){
+                    json.pass = user.validPassword(req.body.password);
+                }
+                res.json(json);
+            });
+        });
 	/*
 	*	Set "is" on users
 	*/

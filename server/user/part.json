@@ -7,11 +7,8 @@
 		"name": "Auth",
 		"src": "auth.js"
 	}, {
-		"name": "database",
-		"src": "database/list.js"
-	}, {
-		"name": "waw_files",
-		"src": "waw_files/index.js"
+		"name": "Pages",
+		"src": "pages/route.js"
 	}],
 	"crud": {
 		"updatesAll": [{
