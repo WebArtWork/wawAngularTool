@@ -4,10 +4,21 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	{% block header %}
-		<title>WAW Framework</title>
-		<meta name="description" content="Initial waw client under angular 1.x and scss.">
-		<meta name="keywords" content="waw, waw framework">
-		<meta name="author" content="Honchar Denys">
+		<title>{{{title}}}</title>
+		<meta itemprop="name" content="{{{title}}}">
+		<meta name="twitter:title" content="{{{title}}}">
+		<meta property="og:title" content="{{{title}}}" />
+
+		<meta name="description" content="{{{description}}}">
+		<meta itemprop="description" content="{{{description}}}">
+		<meta name="twitter:description" content="{{{description}}}">
+		<meta property="og:description" content="{{{description}}}" />
+
+		<meta itemprop="image" content="{{{image}}}">
+		<meta name="twitter:image:src" content="{{{image}}}">
+		<meta property="og:image" content="{{{image}}}" />
+
+		<meta name="keywords" content="{{{keywords}}}">
 	{% endblock %}
 	<link rel="stylesheet" type="text/css" href="/gen/public.css">
 	<link rel="stylesheet" type="text/css" href="/css/index.css">
@@ -24,11 +35,16 @@
 	gtag('config', 'UA-78236546-11');
 	</script>
 </head>
-<body>
+<body ng-controller="main">
 	{% block body %}
 	{% endblock %}
 	{% block script %}
 		<script src="/gen/public-min.js"></script>
+		<script>
+			angular.module('ngapp', []).controller('main', function(){
+
+			});
+		</script>
 	{% endblock %}
 </body>
 </html>

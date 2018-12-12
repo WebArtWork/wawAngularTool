@@ -1,14 +1,34 @@
 module.exports = function(sd) {
 	sd._app.get('/Login', function(req, res){
-		res.send(sd._derer.renderFile(__dirname+'/Login.html', {}));
+		res.send(sd._derer.renderFile(__dirname+'/Login.html', {
+			title: '',
+			description: '',
+			image: '',
+			keywords: ''
+		}));
 	});
 	sd._app.get('/Sign', function(req, res){
-		res.send(sd._derer.renderFile(__dirname+'/Sign.html', {}));
+		res.send(sd._derer.renderFile(__dirname+'/Sign.html', {
+			title: '',
+			description: '',
+			image: '',
+			keywords: ''
+		}));
 	});
 	sd._app.get('/Reset', function(req, res){
-		res.send(sd._derer.renderFile(__dirname+'/Reset.html', {}));
+		res.send(sd._derer.renderFile(__dirname+'/Reset.html', {
+			title: '',
+			description: '',
+			image: '',
+			keywords: ''
+		}));
 	});
 	sd._app.get('/Recover', function(req, res){
-		res.send(sd._derer.renderFile(__dirname+'/Recover.html', {}));
+		res.send(sd._derer.renderFile(__dirname+'/Recover.html', {
+			title: '',
+			description: '',
+			image: '',
+			keywords: ''
+		}));
 	});
 };
