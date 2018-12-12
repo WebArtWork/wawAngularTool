@@ -1,20 +1,52 @@
-{% extends 'public/index.html' %}
-{% block body %}
-<div>
-	<a ui-sref="NewProject">New Project</a>
-	<a ui-sref="MyProjects">My Projects</a>
-	<a ui-sref="NewItem">New Item</a>
-	<a ui-sref="MyItems">My Items</a>
-	<a target="_self" href="/Item/123">Item</a>
-	<a ui-sref="AllItems">All Items</a>
-	<a ui-sref="ProjectItems">Project Items</a>
-</div>
-<div>
-	<ui-view></ui-view>
-</div>
-{% endblock %}
-{% block script %}
+<!DOCTYPE html>
+<html ng-app="ngapp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{{title}}}</title>
+	<meta itemprop="name" content="{{{title}}}">
+	<meta name="twitter:title" content="{{{title}}}">
+	<meta property="og:title" content="{{{title}}}" />
+
+	<meta name="description" content="{{{description}}}">
+	<meta itemprop="description" content="{{{description}}}">
+	<meta name="twitter:description" content="{{{description}}}">
+	<meta property="og:description" content="{{{description}}}" />
+
+	<meta itemprop="image" content="{{{image}}}">
+	<meta name="twitter:image:src" content="{{{image}}}">
+	<meta property="og:image" content="{{{image}}}" />
+
+	<meta name="keywords" content="{{{keywords}}}">
+	<link rel="stylesheet" type="text/css" href="/gen/public.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
+	<base href="/">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78236546-11"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('config', 'UA-78236546-11');
+	</script>
+</head>
+<body>
+	<div>
+		<a ui-sref="NewProject">New Project</a>
+		<a ui-sref="MyProjects">My Projects</a>
+		<a ui-sref="NewItem">New Item</a>
+		<a ui-sref="MyItems">My Items</a>
+		<a ui-sref="AllItems">All Items</a>
+		<a ui-sref="ProjectItems">Project Items</a>
+	</div>
+	<div>
+		<ui-view></ui-view>
+	</div>
 	<script src="/gen/user-min.js"></script>
 	<script src="/js/wcom/wcom.js"></script>
 	<script src="/js/crud.js"></script>
-{% endblock %}
+</body>
+</html>

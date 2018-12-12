@@ -49,6 +49,26 @@ module.exports = function(sd) {
                 res.json(json);
             });
         });
+		router.post("/changePassword", sd._ensure, function(req, res) {
+			if (req.user.validPassword(req.body.oldPass)){
+				req.user.password = req.user.generateHash(req.body.newPass);
+				req.user.save(function(){
+					res.json(true);
+				});
+			}else res.json(false);
+		});
+		router.post("/admin/changePassword", sd.ensure_super, function(req, res) {
+			User.findOne({_id: req.body._id}, function(err, user){
+				user.password = user.generateHash(req.body.newPass);
+				user.save(function(){
+					res.json(true);
+				});
+			});
+		});
+		router.get('/logout', function(req, res) {
+			req.logout();
+			res.redirect(sd._config.passport.local.successRedirect);
+		});
 	/*
 	*	Set "is" on users
 	*/
@@ -86,26 +106,6 @@ module.exports = function(sd) {
 		}
 	// Local Routing
 		if(sd._config.passport.local){
-			router.post("/changePassword", sd._ensure, function(req, res) {
-				if (req.user.validPassword(req.body.oldPass)){
-					req.user.password = req.user.generateHash(req.body.newPass);
-					req.user.save(function(){
-						res.json(true);
-					});
-				}else res.json(false);
-			});
-			router.post("/admin/changePassword", sd.ensure_super, function(req, res) {
-				User.findOne({_id: req.body._id}, function(err, user){
-					user.password = user.generateHash(req.body.newPass);
-					user.save(function(){
-						res.json(true);
-					});
-				});
-			});
-			router.get('/logout', function(req, res) {
-				req.logout();
-				res.redirect(sd._config.passport.local.successRedirect);
-			});
 			var LocalStrategy = require('passport-local').Strategy;
 			router.post('/login', sd._passport.authenticate('local-login', {
 				successRedirect: sd._config.passport.local.successRedirect,
@@ -134,7 +134,7 @@ module.exports = function(sd) {
 				passwordField : 'password',
 				passReqToCallback : true
 			}, function(req, username, password, done) {
-				recaptcha.verify(req, function(error) {
+				//recaptcha.verify(req, function(error) {
 					User.findOne({
 						'email': username.toLowerCase()
 					}, function(err, user) {
@@ -154,7 +154,7 @@ module.exports = function(sd) {
 							});
 						}
 					});
-				});
+				//});
 			}));
 		}
 	// Google

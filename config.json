@@ -1,5 +1,5 @@
 {
-	"name": "wawAngularTool",
+	"name": "waw Tool",
 	"description": "Startup project with focus of creating new tool which will help with something.",
 	"icon": "/client/img/favicon.png",
 	"prefix": "initialize",
