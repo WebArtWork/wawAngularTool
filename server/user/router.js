@@ -62,26 +62,25 @@ module.exports = function(sd) {
 	*	Avatar Management
 	*/
 	router.post("/file", function(req, res) {
-			console.log(req.body.dataUrl.length);
-			req.user.avatarUrl = '/api/user/avatar/' + req.user._id + '.jpg?' + Date.now();
-			sd._parallel([function(n){
-				req.user.save(n);
-			}, function(n){
-				sd._dataUrlToLocation(req.body.dataUrl,
-					__dirname + '/files/', req.user._id + '.jpg', n);
-			}], function(){
-				console.log(req.user.avatarUrl);
-				res.json(req.user.avatarUrl);
-			});
+		req.user.avatarUrl = '/api/user/avatar/' + req.user._id + '.jpg?' + Date.now();
+		sd._parallel([function(n){
+			req.user.save(n);
+		}, function(n){
+			sd._dataUrlToLocation(req.body.dataUrl,
+				__dirname + '/files/', req.user._id + '.jpg', n);
+		}], function(){
+			console.log(req.user.avatarUrl);
+			res.json(req.user.avatarUrl);
 		});
-		router.get("/avatar/:file", function(req, res) {
-			res.sendFile(__dirname + '/files/' + req.params.file);
-		});
-		router.get("/default.png", function(req, res) {
-			res.sendFile(__dirname + '/files/avatar.png');
-		});
-		router.get("/default.jpg", function(req, res) {
-			res.sendFile(__dirname + '/files/avatar.png');
-		});
+	});
+	router.get("/avatar/:file", function(req, res) {
+		res.sendFile(__dirname + '/files/' + req.params.file);
+	});
+	router.get("/default.png", function(req, res) {
+		res.sendFile(__dirname + '/files/avatar.png');
+	});
+	router.get("/default.jpg", function(req, res) {
+		res.sendFile(__dirname + '/files/avatar.png');
+	});
 	// End of
 };

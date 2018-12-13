@@ -25,7 +25,7 @@ app.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 		templateUrl: '/html/user/MyItems.html'
 	}).state({
 		name: 'AllItems',
-		url: '/AllItems', controller: ctrl,
+		url: '/', controller: ctrl,
 		templateUrl: '/html/user/AllItems.html'
 	}).state({
 		name: 'ProjectItems',
@@ -48,7 +48,8 @@ services.User = function($http, $timeout, mongo){
 	this.update = function(){}
 }
 services.Project = function(mongo){
-	self.projects = mongo.get('project');
+	var self = this;
+	this.projects = mongo.get('project');
 	this.create = function(doc){
 		mongo.create('project', doc);
 	}
@@ -62,7 +63,8 @@ services.Project = function(mongo){
 	}
 }
 services.Tag = function(mongo){
-	self.projects = mongo.get('tag');
+	var self = this;
+	this.projects = mongo.get('tag');
 	this.create = function(doc){
 		mongo.create('tag', doc);
 	}
@@ -76,7 +78,8 @@ services.Tag = function(mongo){
 	}
 }
 services.Item = function(mongo){
-	self.projects = mongo.get('item');
+	var self = this;
+	this.projects = mongo.get('item');
 	this.create = function(doc){
 		mongo.create('item', doc);
 	}
