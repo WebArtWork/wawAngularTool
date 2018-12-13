@@ -13,4 +13,7 @@ module.exports = function(sd) {
 			author: req.user._id
 		};
 	};
+	sd['query_get_item'] = function(req, res){
+		return {};
+	};
 };

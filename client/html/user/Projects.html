@@ -1,0 +1,6 @@
+<div ng-repeat="project in p.projects">
+	<span>{{project.name}}</span>
+	<a ui-sref="ProjectItems({items_project_id: project._id})">Project Items</a>
+	<a ui-sref="Project({project_id: project._id})">Project Settings</a>
+	<button ng-click="p.delete(project);">Delete</button>
+</div>

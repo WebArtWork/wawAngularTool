@@ -1,0 +1,4 @@
+<form ng-submit="p.update(p.project);">
+	<input type="text" ng-model="p.project.name">
+	<button>{{::(p.project._id&&'Save'||'Create')}}</button>
+</form>

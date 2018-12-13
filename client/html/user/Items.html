@@ -1,0 +1,6 @@
+<div ng-repeat="item in items">
+	<span>{{item.name}}</span>
+	<a ui-sref="item({item_id: item._id})">Edit</a>
+	<button ng-click="i.delete(item);" ng-if="item.author==u._id">Delete</button>
+	<button ng-if="i.state.name != 'ProjectItems'" ng-click="i.add(item);">Add</button>
+</div>

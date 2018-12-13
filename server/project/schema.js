@@ -2,6 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema({
 	name: String,
 	description: String,
+
+	base: {type: mongoose.Schema.Types.ObjectId, ref: 'Item'},
+	items: [{type: mongoose.Schema.Types.ObjectId, ref: 'Item'}],
+
 	author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
 	moderators: [{type: mongoose.Schema.Types.ObjectId, sparse: true, ref: 'User'}],
 	url: {type: String, unique: true, sparse: true, trim: true}

@@ -1,0 +1,5 @@
+<h3>adding {{item.name}}</h3>
+<div ng-repeat="project in p.projects">
+	<span>{{project.name}}</span>
+	<button ng-disabled="project.items.indexOf(item._id)>=0" ng-click="project.items.push(item._id); p.update(project);">Add</button>
+</div>
