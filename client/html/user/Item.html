@@ -1,3 +1,14 @@
 <form ng-submit="i.update(i.item);">
 	<input type="text" ng-model="i.item.name" ng-change="i.update(i.item);">
 </form>
+
+<div>
+	<label ng-repeat="tag in t.tags">
+		<input type="radio" name="filter" ng-model="i.item.tag" ng-change="i.update(i.item);" ng-value="tag._id">
+		<span>{{tag.name}}</span>
+	</label>
+	<form ng-submit="name&&t.create(name); name='';">
+		<input type="text" name="tag" ng-model="name" placeholder="New Tag Name">
+		<button>Create</button>
+	</form>
+</div>

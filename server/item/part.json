@@ -8,7 +8,7 @@
 	},
 	"crud": {
 		"updatesAll": [{
-			"keys": ["name","description"],
+			"keys": ["name","description", "tag"],
 			"name": ""
 		},{
 			"keys": ["moderators"],

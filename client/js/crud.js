@@ -27,33 +27,37 @@ app.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
 		templateUrl: '/html/user/Item.html'
 	}).state({
 		name: 'Item',
-		url: '/Item/:item_id', controller: function($scope, Item, mongo){
+		url: '/Item/:item_id', controller: function($scope, Item, Tag, mongo){
 			$scope.i = Item;
+			$scope.t = Tag;
 			mongo.on('item', Item.set);
 		},
 		templateUrl: '/html/user/Item.html'
 	}).state({
 		name: 'Items',
-		url: '/Items', controller: function($scope, Item, User){
+		url: '/Items', controller: function($scope, Item, Tag, User){
 			$scope.u = User;
 			$scope.i = Item;
+			$scope.t = Tag;
 			$scope.items = Item.mine;
 		},
 		templateUrl: '/html/user/Items.html'
 	}).state({
 		name: 'AllItems',
-		url: '/', controller: function($scope, Item, User){
+		url: '/', controller: function($scope, Item, Tag, User){
 			$scope.u = User;
 			$scope.i = Item;
+			$scope.t = Tag;
 			$scope.items = Item.items;
 		},
 		templateUrl: '/html/user/Items.html'
 	}).state({
 		name: 'ProjectItems',
-		url: '/Items/:items_project_id', controller: function($scope, Item, User, Project, mongo){
+		url: '/Items/:items_project_id', controller: function($scope, Item, Tag, User, Project, mongo){
 			$scope.u = User;
 			$scope.i = Item;
 			$scope.p = Project;
+			$scope.t = Tag;
 			mongo.on('project item', function(){
 				Project.set(function(){
 					$scope.items = [];
@@ -111,9 +115,26 @@ services.Project = function(mongo, $state){
 			_id: doc._id
 		});
 	}
-
 }
-services.Item = function(mongo, $state, User, Project, modal){
+services.Tag = function(mongo){
+	var self = this;
+	this.tag = '';
+	this.tags = mongo.get('tag');
+	this.create = function(name){
+		mongo.create('tag', {
+			name: name
+		});
+	}
+	this.update = function(doc){
+		mongo.updateAll('tag', doc);
+	}
+	this.delete = function(doc){
+		mongo.delete('tag', {
+			_id: doc
+		});
+	}
+}
+services.Item = function($state, User, Project, Tag, mongo, modal){
 	var self = this;
 	this.state = $state.current;
 	this.set = function(){
@@ -167,21 +188,6 @@ services.Item = function(mongo, $state, User, Project, modal){
 			item: item,
 			p: Project,
 			i: self
-		});
-	}
-}
-services.Tag = function(mongo){
-	var self = this;
-	this.projects = mongo.get('tag');
-	this.create = function(doc){
-		mongo.create('tag', doc);
-	}
-	this.update = function(doc){
-		mongo.updateAll('tag', doc);
-	}
-	this.delete = function(doc){
-		mongo.delete('tag', {
-			_id: doc
 		});
 	}
 }

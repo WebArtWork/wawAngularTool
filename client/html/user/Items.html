@@ -1,6 +1,17 @@
-<div ng-repeat="item in items">
+<div ng-repeat="item in (t.tag&&(items|filter:{tag:t.tag})||items)">
 	<span>{{item.name}}</span>
-	<a ui-sref="item({item_id: item._id})">Edit</a>
+	<a ui-sref="Item({item_id: item._id})">Edit</a>
 	<button ng-click="i.delete(item);" ng-if="item.author==u._id">Delete</button>
 	<button ng-if="i.state.name != 'ProjectItems'" ng-click="i.add(item);">Add</button>
+</div>
+
+<div>
+	<label>
+		<input type="radio" name="filter" ng-model="t.tag" ng-value="''">
+		<span>All</span>
+	</label>
+	<label ng-repeat="tag in t.tags">
+		<input type="radio" name="filter" ng-model="t.tag" ng-value="tag._id">
+		<span>{{tag.name}}</span>
+	</label>
 </div>
